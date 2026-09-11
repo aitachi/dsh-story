@@ -1,0 +1,38 @@
+{
+  "name": "@oh-story/dsh",
+  "version": "0.2.0",
+  "license": "MIT",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./lib/types/index.d.ts",
+      "default": "./lib/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "pack:release": "tsx pack.mjs",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "dependencies": {
+    "@oh-story/skills": "workspace:^",
+    "@oh-story/roles": "workspace:^",
+    "@oh-story/workspace": "workspace:^",
+    "@oh-story/ui": "workspace:^"
+  },
+  "devDependencies": {
+    "@oh-story/skills": "workspace:^",
+    "@oh-story/roles": "workspace:^",
+    "@oh-story/workspace": "workspace:^",
+    "@oh-story/ui": "workspace:^",
+    "esbuild": "0.28.2",
+    "@deepseek-ai/cordis": "workspace:^"
+  }
+}

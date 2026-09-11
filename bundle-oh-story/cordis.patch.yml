@@ -1,0 +1,13 @@
+# The Oh Story bundle: the story + short-drama creative specialization.
+# Composes the split capability rows; add or remove this bundle in a profile's
+# dsh.profile.bundles list (or install/uninstall the release tarball) to plug
+# the whole capability set in or out.
+- insert:
+    - id: oh-story-skills
+      name: '@oh-story/skills'
+    - id: oh-story-roles
+      name: '@oh-story/roles'
+    - id: oh-story-workspace
+      name: '@oh-story/workspace'
+    - id: oh-story-ui
+      name: '@oh-story/ui'
