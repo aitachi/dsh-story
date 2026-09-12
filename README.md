@@ -1,6 +1,8 @@
 # oh-story dsh plugin(DeepSFV 分支)
 
-> v0.2.0 原生拆分包快照 · 2026-09-11 · 来源:DeepSFV 3080 harness(907harness @ feature/deepsfv 45ae95b92f)
+> **Release v0.3.0** · 2026-09-12 · 基线:DeepSFV 3080 harness(907harness @ feature/deepsfv 45ae95b92f)
+>
+> v0.3.0 = v0.2.0 快照 + 手动画布(矢量箭头)+ 分镜字段解析兼容 + DashScope 图片适配器
 
 本仓库为 DeepSFV(深视星影)harness 内运行的 oh-story 插件**当前版本源码快照**,替换旧版单仓结构。五个 workspace 子包:
 
