@@ -169,7 +169,7 @@ export function parseStoryboard(path: string, content: string): DramaShot[] {
       shotSpec: firstField(fields, '景别/机位', '景别', '镜头规格'),
       start: firstField(fields, '起点', '起始'),
       end: firstField(fields, '终点', '结束'),
-      references: splitReferences(firstField(fields, '图片提示词项', '参考', '关联资产')),
+      references: splitReferences(firstField(fields, '图片提示词项', '视觉依据', '输入参考图', '参考', '关联资产')),
       keyframePrompt: quoteUnderHeading(section.body, '冻结关键帧提示词'),
     }]
   })
@@ -324,6 +324,12 @@ function bulletFields(body: string): Map<string, string> {
     const key = match[1]?.trim()
     const value = match[2]?.trim()
     if (key !== undefined && value !== undefined) fields.set(key, value)
+  }
+  // 分镜/提示词文档存在 `**键**：值` 加粗写法(无列表符),同样纳入字段表;列表式优先。
+  for (const match of body.matchAll(/^\s*\*\*([^：:\n]+?)\*\*\s*[：:]\s*(.+?)\s*$/gmu)) {
+    const key = match[1]?.trim()
+    const value = match[2]?.trim()
+    if (key !== undefined && value !== undefined && !fields.has(key)) fields.set(key, value)
   }
   return fields
 }

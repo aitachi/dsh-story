@@ -480,12 +480,16 @@
 .oh-story-canvas-shell { position: relative; display: flex; height: max(580px, calc(100% - 84px)); min-height: 580px; flex-direction: column; overflow: hidden; }
 .oh-story-canvas-shell > .oh-story-projection-note { z-index: 3; flex: none; margin: 8px 168px 8px 8px; }
 .oh-story-canvas-controls { position: absolute; z-index: 4; top: 8px; right: 8px; display: flex; align-items: center; gap: 3px; padding: 3px; border: 1px solid var(--os-border); border-radius: 8px; background: var(--dsw-alias-bg-base); }
+.oh-story-canvas-legend { position: absolute; z-index: 4; top: 44px; right: 8px; display: flex; gap: 10px; padding: 3px 10px; border: 1px solid var(--os-border); border-radius: 8px; background: var(--dsw-alias-bg-base); color: var(--os-muted); font-size: 12px; }
+.oh-story-canvas-legend span[data-kind="reference"]::before { content: "── "; }
+.oh-story-canvas-legend span[data-kind="sequence"]::before { content: "┄┄ "; }
 .oh-story-canvas-controls span { min-width: 44px; color: var(--os-muted); text-align: center; }
 .oh-story-canvas-viewport { width: 100%; min-height: 0; flex: 1; overflow: auto; background-color: var(--dsw-alias-bg-base); background-image: radial-gradient(var(--os-border) 1px, transparent 1px); background-size: 20px 20px; }
 .oh-story-canvas { position: relative; width: 1800px; height: 1800px; transform-origin: 0 0; }
 .oh-story-canvas svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
 .oh-story-canvas path { fill: none; opacity: .35; stroke: var(--dsw-alias-border-l2); stroke-width: 1.5; }
 .oh-story-canvas path[data-active] { opacity: .8; stroke: var(--dsw-alias-state-business-primary); }
+.oh-story-canvas path[data-kind="sequence"] { stroke-dasharray: 5 4; }
 .oh-story-canvas article { position: absolute; display: flex; width: 180px; min-height: 76px; box-sizing: border-box; flex-direction: column; gap: 4px; padding: 10px; border: 1px solid var(--os-border); border-radius: 8px; background: var(--dsw-alias-bg-layer-1); box-shadow: 0 4px 14px rgb(0 0 0 / 8%); cursor: grab; user-select: none; touch-action: none; }
 .oh-story-canvas article:active { cursor: grabbing; }
 .oh-story-canvas article[data-node-type="shot"] { border-color: var(--dsw-alias-state-business-primary); }

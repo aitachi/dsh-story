@@ -168,3 +168,39 @@ describe('storyboard contract regressions', () => {
     expect(production.diagnostics.map(item => item.code)).not.toContain('generated_visual_id')
   })
 })
+
+describe('bold-field storyboard documents', () => {
+  const boldStoryboard = `# EP001 分镜
+
+## SHOT-EP001-001 · 门外停步
+**场景**：SC001 门外
+**时长**：5s
+**视觉依据**：IMG-JIANGCHEN-SHEET（角色板）；IMG-OLD-DOOR（旧门）。
+**输入参考图**：无
+
+### 冻结关键帧提示词
+> 门外一瞬。
+
+## SHOT-EP001-002 · 推门
+**视觉依据**：IMG-JIANGCHEN-SHEET。
+`
+
+  it('parses bold `**键**：值` fields and extracts references from 视觉依据', () => {
+    const shots = parseStoryboard(`${episode}/分镜.md`, boldStoryboard)
+    expect(shots[0]?.references).toEqual(['IMG-JIANGCHEN-SHEET', 'IMG-OLD-DOOR'])
+    expect(shots[0]?.durationSeconds).toBe(5)
+    expect(shots[1]?.references).toEqual(['IMG-JIANGCHEN-SHEET'])
+    expect(productionCompleteness(shots[0]!).references).toBe(true)
+  })
+
+  it('prefers the bullet form when both spellings appear', () => {
+    const shots = parseStoryboard(`${episode}/分镜.md`, '## SHOT-A-001 · x\n- 图片提示词项：IMG-BULLET。\n**视觉依据**：IMG-BOLD。\n')
+    expect(shots[0]?.references).toEqual(['IMG-BULLET'])
+  })
+
+  it('keeps 视觉依据 without any IMG token as an empty reference list', () => {
+    const shots = parseStoryboard(`${episode}/分镜.md`, '## SHOT-A-001 · x\n**视觉依据**：无\n')
+    expect(shots[0]?.references).toEqual([])
+    expect(productionCompleteness(shots[0]!).references).toBe(false)
+  })
+})
