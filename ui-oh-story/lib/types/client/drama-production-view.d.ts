@@ -1,6 +1,8 @@
 import { type DramaDocumentTarget, type DramaEpisodeProduction, type DramaProductionSection } from './drama-production.js';
 import { type CanvasPoint, type ProductionJob, type ProductionMediaVersion, type ProductionQueueEntry, type ProductionSequenceItem } from './production-runtime.js';
-interface Props {
+export interface Props {
+    readonly canvasLinks?: readonly CanvasLink[] | undefined;
+    readonly onCanvasLinksChange?: ((links: CanvasLink[]) => void) | undefined;
     readonly production: DramaEpisodeProduction;
     readonly sessionRunning: boolean;
     readonly queue: readonly ProductionQueueEntry[];
@@ -30,5 +32,5 @@ interface Props {
     readonly onRefresh: () => void;
 }
 export declare function DramaProductionView(props: Props): import("react/jsx-runtime").JSX.Element;
-export {};
+import { type CanvasLink } from './manual-canvas.js';
 //# sourceMappingURL=drama-production-view.d.ts.map

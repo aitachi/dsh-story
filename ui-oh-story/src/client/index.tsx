@@ -31,7 +31,7 @@ import {
   type DramaDocumentTarget,
   type DramaProductionSection,
 } from './drama-production.js'
-import { DramaProductionView } from './drama-production-view.js'
+import { CanvasDocument } from './canvas-document.js'
 import { createPendingJob, type
 CanvasPoint,
 mediaTargetFromPath,
@@ -1064,7 +1064,7 @@ function CreativeWorkbench({
                   setSelected(workspace === undefined ? undefined : preferredWorkbenchFile(workspace.files, workbench))
                 }}>放弃本地草稿</button></div>
                 : editorMode === 'production' && productionAvailable && episodeProduction !== undefined
-                  ? <DramaProductionView
+                  ? <CanvasDocument key={`${sessionId}:${episodeProduction.episodeDirectory}`} sessionId={sessionId}
                     production={episodeProduction}
                     sessionRunning={sessionRunning}
                     queue={productionQueue}

@@ -110,7 +110,7 @@ export function parseVideoPrompts(path, content) {
             return [];
         const fields = bulletFields(section.body);
         const id = match[1].toLocaleUpperCase();
-        const shotId = firstField(fields, '分镜', '镜头')?.match(/SHOT-[A-Z0-9-]+/iu)?.[0]?.toLocaleUpperCase();
+        const shotId = firstField(fields, '分镜', '镜头', '关联镜头')?.match(/SHOT-[A-Z0-9-]+/iu)?.[0]?.toLocaleUpperCase();
         return [{
                 id,
                 title: match[2]?.trim() || id,
@@ -218,7 +218,7 @@ function levelTwoSections(content) {
 function bulletFields(body) {
     const fields = new Map();
     for (const match of body.matchAll(/^\s*[-*]\s+([^：:\n]+)[：:]\s*(.+?)\s*$/gmu)) {
-        const key = match[1]?.trim();
+        const key = match[1]?.trim().replace(/^(?:\*\*|__)(.+?)(?:\*\*|__)$/u, '$1').trim();
         const value = match[2]?.trim();
         if (key !== undefined && value !== undefined)
             fields.set(key, value);

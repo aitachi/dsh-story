@@ -7,7 +7,7 @@ import { buildFileTree } from './file-tree.js';
 import { JsonlPreview } from './jsonl-preview.js';
 import { MarkdownPreview } from './markdown-preview.js';
 import { creatorDocumentPaths, episodeDirectoryForPath, isCreatorDocumentPath, parseEpisodeProduction, } from './drama-production.js';
-import { DramaProductionView } from './drama-production-view.js';
+import { CanvasDocument } from './canvas-document.js';
 import { createPendingJob, mediaTargetFromPath, } from './production-runtime.js';
 import { settledProductionIntents } from './production-intents.js';
 import { OH_STORY_PRODUCTION_TOOL_NAME } from './production-intent.js';
@@ -880,7 +880,7 @@ function CreativeWorkbench({ sessionId, runningCalls, partial, settledMutation, 
                                                             setSelected(workspace === undefined ? undefined : preferredWorkbenchFile(workspace.files, workbench));
                                                         }, children: "\u653E\u5F03\u672C\u5730\u8349\u7A3F" })] })
                                             : editorMode === 'production' && productionAvailable && episodeProduction !== undefined
-                                                ? _jsx(DramaProductionView, { production: episodeProduction, sessionRunning: sessionRunning, queue: productionQueue, section: productionSection, selectedId: productionSelectedId, jobs: productionJobs, versions: productionVersions, libraryVersions: productionLibrary, selections: productionSelections, manualReferences: productionReferences, sequence: productionSequence, canvas: productionCanvas, zoom: productionZoom, onSectionChange: setProductionSection, onSelect: setProductionSelectedId, onNavigate: navigateProductionTarget, onJobsChange: setProductionJobs, onSelectionsChange: setProductionSelections, onManualReferencesChange: setProductionReferences, onOpenMedia: (path) => { revealPath(path); }, onSequenceChange: setProductionSequence, onCanvasChange: setProductionCanvas, onZoomChange: setProductionZoom, onDispatchPrompt: sendProductionPrompt, onCancelTurn: cancelProduction, onRemoveQueued: removeQueuedProduction, onRefresh: reload })
+                                                ? _jsx(CanvasDocument, { sessionId: sessionId, production: episodeProduction, sessionRunning: sessionRunning, queue: productionQueue, section: productionSection, selectedId: productionSelectedId, jobs: productionJobs, versions: productionVersions, libraryVersions: productionLibrary, selections: productionSelections, manualReferences: productionReferences, sequence: productionSequence, canvas: productionCanvas, zoom: productionZoom, onSectionChange: setProductionSection, onSelect: setProductionSelectedId, onNavigate: navigateProductionTarget, onJobsChange: setProductionJobs, onSelectionsChange: setProductionSelections, onManualReferencesChange: setProductionReferences, onOpenMedia: (path) => { revealPath(path); }, onSequenceChange: setProductionSequence, onCanvasChange: setProductionCanvas, onZoomChange: setProductionZoom, onDispatchPrompt: sendProductionPrompt, onCancelTurn: cancelProduction, onRemoveQueued: removeQueuedProduction, onRefresh: reload }, `${sessionId}:${episodeProduction.episodeDirectory}`)
                                                 : previewable && editorMode === 'preview'
                                                     ? markdown
                                                         ? _jsx(MarkdownPreview, { content: buffer.content, label: selected })

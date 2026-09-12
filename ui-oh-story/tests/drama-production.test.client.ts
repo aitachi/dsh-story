@@ -146,6 +146,14 @@ describe('storyboard contract regressions', () => {
     expect(shots[0]?.references).toEqual(['IMG-ONE'])
   })
 
+  it('links generated motion prompts that label their shot as 关联镜头', () => {
+    const motions = parseVideoPrompts(
+      `${episode}/视频提示词.md`,
+      '## MOTION-001（对应 SHOT-001）\n- **关联镜头**：SHOT-001\n- **时长**：6 秒\n',
+    )
+    expect(motions[0]).toMatchObject({ id: 'MOTION-001', shotId: 'SHOT-001', durationSeconds: 6 })
+  })
+
   it('does not raise malformed_heading for a separator the parser accepts', () => {
     const production = parseEpisodeProduction({
       [`${episode}/分镜.md`]: '## SHOT-EP001-001·门外停步\n- 时长：4s\n',
